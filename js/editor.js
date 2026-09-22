@@ -28,7 +28,21 @@ export function mountEditor(id, ui) {
     document.querySelectorAll('[data-duplicate]').forEach(b=>b.onclick=()=>{const i=Number(b.dataset.duplicate);song.sections.splice(i+1,0,structuredClone(song.sections[i]));mark();draw();});
     document.querySelectorAll('[data-up],[data-down]').forEach(b=>b.onclick=()=>{const i=Number(b.dataset.up ?? b.dataset.down),to=b.dataset.up!==undefined?i-1:i+1;if(to<0||to>=song.sections.length)return;[song.sections[i],song.sections[to]]=[song.sections[to],song.sections[i]];mark();draw();});
     document.querySelector('[data-add-section]').onclick=()=>{song.sections.push({id:`section-${Date.now()}`,type:'custom',name:'Nueva sección',lines:[{text:'',chords:[]}]});mark();draw();};
-    document.querySelector('[data-save]').onclick=()=>{if(!song.title.trim()||!song.originalKey.trim())return ui.notify('Título y tonalidad son obligatorios.');for(const s of song.sections)for(const l of s.lines)for(const c of l.chords)if(!validChord(c.value))return ui.notify(`Acorde inválido: ${c.value}`);store.saveSong(song);dirty=false;ui.notify('Canción guardada');ui.render({name:'song',id:song.id});};
+    document.querySelector('[data-save]').onclick=async()=>{
+      if(!song.title.trim()||!song.originalKey.trim())return ui.notify('Título y tonalidad son obligatorios.');
+      for(const s of song.sections)for(const l of s.lines)for(const c of l.chords)if(!validChord(c.value))return ui.notify(`Acorde inválido: ${c.value}`);
+      const button=document.querySelector('[data-save]'); button.disabled=true; button.textContent='Guardando…';
+      try{
+        await store.saveSong(song);
+        dirty=false;
+        ui.notify(store.firebase?'Canción guardada en Firebase':'Canción guardada localmente (sin conexión a Firebase)');
+        ui.render({name:'song',id:song.id});
+      }catch(error){
+        console.error('Error al guardar en Firebase:',error);
+        button.disabled=false; button.textContent='Guardar canción';
+        ui.notify('No se pudo guardar en Firebase: '+(error.message||'error desconocido'));
+      }
+    };
     document.querySelector('[data-cancel]').onclick=()=>{if(!dirty||confirm('Tenés cambios sin guardar. ¿Descartarlos?'))ui.render({name:'library'});};
   };
   window.onbeforeunload=()=>dirty?'Tenés cambios sin guardar.':undefined;

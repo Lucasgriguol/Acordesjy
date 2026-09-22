@@ -29,6 +29,6 @@ Usá un servidor local: `npx serve .` y abrí la dirección indicada. La app inc
 - `js/editor.js`: editor visual y vista previa.
 - `js/firebase.js`: conexión del cliente Firebase.
 - `functions/`: validación segura del código en servidor.
-- `firestore.rules` y `storage.rules`: permisos.
+- `firestore.rules`: permisos de Firestore.
 
 Firebase es la fuente de información compartida cuando se completa la configuración. La configuración web de Firebase es pública por diseño; los secretos y el código de edición viven en Functions/Secret Manager, nunca en JavaScript del navegador.
