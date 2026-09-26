@@ -2,7 +2,7 @@ import {demoSongs} from './data.js';
 import { obtenerServiciosFirebase } from './firebase.js';
 const DRAFT='acorde-draft';
 export const store={
-  songs:structuredClone(demoSongs), repertoires:[{id:'domingo',name:'Repertorio Domingo',songIds:['grande-amor','luz','refugio'],notes:'Entrar después del segundo coro.'}],
+  songs:structuredClone(demoSongs), repertoires:[{id:'domingo',name:'',songIds:['grande-amor','luz','refugio'],notes:''}],
   favorites:new Set(JSON.parse(localStorage.getItem('acorde-favorites')||'[]')),
   conectado:false,
   async iniciarFirebase(){
