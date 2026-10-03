@@ -471,35 +471,66 @@ button {
     opacity: 1
 }
 
+/* ============ MODO INTERPRETACIÓN ============ */
 .performance {
-    background: #102a43;
+    background: #000;
     color: #fff;
-    min-height: 100vh
+    min-height: 100vh;
 }
-
 .performance .main {
-    max-width: 960px
+    max-width: 960px;
 }
-
 .performance .card,
 .performance .controls {
-    background: #173c5f;
-    color: #fff
+    background: #111;
+    color: #fff;
+    border-color: #ffffff14;
+    box-shadow: 0 12px 32px #00000080;
 }
-
-.performance .reader-header,
-.performance .song-section h2,
-.performance .chords {
-    color: #fff
+.performance .reader-header {
+    background: transparent;
+    box-shadow: none;
+    padding-left: 0;
+    color: #fff;
 }
-
+.performance .reader-header .subtle {
+    color: #b8b8b8;
+}
 .performance .song-section h2 {
-    border-color: #63879c
+    color: #fff;
+    border-color: #444;
 }
-
+.performance .chords {
+    color: #fff;
+}
+.performance .chord {
+    background: #ffffff1a;
+    color: #ffd166;
+}
+.performance .lyric-line {
+    color: #f1f1f1;
+}
 .performance .button.ghost {
     color: #fff;
-    border-color: #63879c
+    border-color: #444;
+    background: transparent;
+}
+.performance .button.ghost:hover {
+    background: #ffffff10;
+}
+.performance .transpose {
+    background: #1a1a1a;
+}
+.performance .transpose button {
+    background: #2a2a2a;
+    color: #ffd166;
+}
+.performance .song-section h2::before {
+    background: #ffd166;
+    box-shadow: 0 0 0 4px #ffd16628;
+}
+.performance .song-content {
+    max-width: 850px;
 }
 
 @media(max-width:700px) {
