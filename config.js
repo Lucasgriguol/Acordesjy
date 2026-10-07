@@ -30,7 +30,7 @@ export const firebaseConfigurado = () =>
 // Ofuscación simple (base64 + XOR). No es seguridad real:
 // alguien con DevTools puede recuperarlo. Es un filtro para
 // que un amigo curioso no toque "Editar" sin saber el código.
-export const CODIGO_OBFUSCADO = 'fWJyfg==';
+export const CODIGO_OBFUSCADO = 'eXt5fA==';
 export const CLAVE_XOR = 73;
 
 // Decodifica el código de edición en runtime.

@@ -15,9 +15,7 @@ function normalizarFecha(valor, fallback = Date.now()) {
 
 export const store = {
   songs: structuredClone(demoSongs),
-  repertoires: [
-    { id: 'domingo', name: 'Domingo', songIds: ['grande-amor', 'luz', 'refugio'], notes: 'Servicio de la mañana' }
-  ],
+  repertoires: [],
   favorites: new Set(JSON.parse(localStorage.getItem(FAV_KEY) || '[]')),
   conectado: false,
   firebase: null,
@@ -30,7 +28,6 @@ export const store = {
       const user = await asegurarSesion();
       if (!user) return false;
 
-      // Favoritos: merge local + remoto
       try {
         const favDoc = await firebase.getDoc(firebase.doc(firebase.db, 'favorites', user.uid));
         if (favDoc.exists()) {
